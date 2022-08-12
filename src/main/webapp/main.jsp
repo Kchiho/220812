@@ -3,9 +3,8 @@
 <%
 request.setCharacterEncoding("UTF-8");
 %>
-<jsp:useBean id="datas" class="java.util.ArrayList" scope="request" />
 <jsp:useBean id="member" class="vo.MemberVO" scope="session" />
-<jsp:useBean id="boardL" class="vo.BoardLVO" scope="session" />
+<%@taglib tagdir="/WEB-INF/tags" prefix="kim"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,20 +34,7 @@ request.setCharacterEncoding("UTF-8");
 			<th>좋아요</th>
 			<th>작성일</th>
 		</tr>
-		<%
-		for (BoardVO v : (ArrayList<BoardVO>) datas) {
-		%>
-		<tr>
-			<th><a href="controller.jsp?action=board&bid=<%=v.getBid()%>"><%=v.getBid()%></a></th>
-			<td><%=v.getTitle()%></td>
-			<td><%=v.getWriter()%></td>
-			<td><%=v.getBread()%></td>
-			<td><%=v.getBlike()%></td>
-			<td><%=v.getBdate()%></td>
-		</tr>
-		<%
-		}
-		%>
+		<kim:selectAll></kim:selectAll>
 	</table>
 	<hr>
 	<table border="1">

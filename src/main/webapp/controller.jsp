@@ -8,7 +8,6 @@ request.setCharacterEncoding("UTF-8");
 <jsp:useBean id="bDAO" class="dao.BoardDAO" />
 <jsp:useBean id="bVO" class="vo.BoardVO" />
 <jsp:setProperty property="*" name="bVO" />
-<jsp:setProperty property="*" name="bVO" />
 <jsp:useBean id="mDAO" class="dao.MemberDAO" />
 <jsp:useBean id="mVO" class="vo.MemberVO" />
 <jsp:setProperty property="*" name="mVO" />
@@ -32,12 +31,12 @@ if (action.equals("main")) { // 메인
 		throw new Exception("insert 오류");
 	}
 } else if (action.equals("search")) { // 검색
-	if (bDAO.selectAlls(bVO) != null) {
-		ArrayList<BoardVO> datas = bDAO.selectAlls(bVO);
-		request.setAttribute("datas", datas);
+	ArrayList<BoardVO> datas = bDAO.selectAlls(bVO);
+	if (datas.size() != 0) {
+		request.setAttribute("data", bVO);
 		pageContext.forward("searchResult.jsp"); // forward 액션
 	} else {
-		throw new Exception("selectAll 오류");
+		out.println("<script>alert('검색결과가 없습니다.');location.href='controller.jsp?action=main'</script>");
 	}
 } else if (action.equals("updateB")) { // 게시글 변경
 	if (bDAO.update(bVO)) {
@@ -119,10 +118,9 @@ if (action.equals("main")) { // 메인
 	out.println("<script>alert('좋아요 -1');location.href='controller.jsp?action=main'</script>");
 		}
 	}
-}else if(action.equals("idcheck")){
-	
-}
-else {
+} else if (action.equals("idcheck")) {
+
+} else {
 	out.println("<script>alert('action 파라미터 값이 올바르지 않습니다...');location.href='controller.jsp?action=main'</script>");
 }
 %>
