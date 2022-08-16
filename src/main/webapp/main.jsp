@@ -27,7 +27,7 @@
 			<th>좋아요</th>
 			<th>작성일</th>
 		</tr>
-		<kim:selectAll></kim:selectAll>
+		<kim:selectAll />
 	</table>
 	<hr>
 	<table border="1">
