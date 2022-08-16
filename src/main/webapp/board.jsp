@@ -3,6 +3,7 @@
 <%
 request.setCharacterEncoding("UTF-8");
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:useBean id="data" class="vo.BoardVO" scope="request" />
 <jsp:useBean id="member" class="vo.MemberVO" scope="session" />
 <jsp:useBean id="boardL" class="vo.BoardLVO" scope="session" />
@@ -22,8 +23,8 @@ request.setCharacterEncoding("UTF-8");
 			return;
 		}
 	}
-	function like(){
-			location.href="controller.jsp?action=mlike&bid=${data.bid}";
+	function like() {
+		location.href = "controller.jsp?action=mlike&bid=${data.bid}";
 	}
 </script>
 <form name="bForm" action="controller.jsp" method="post">
@@ -31,8 +32,7 @@ request.setCharacterEncoding("UTF-8");
 	<table border="1">
 		<tr>
 			<td>번호</td>
-			<td><input type="text" name="bid" value="${data.bid}"
-				readonly></td>
+			<td><input type="text" name="bid" value="${data.bid}" readonly></td>
 		</tr>
 		<tr>
 			<td>제목</td>
@@ -41,13 +41,13 @@ request.setCharacterEncoding("UTF-8");
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td><input type="text" name="content"
-				value="${data.content}" required></td>
+			<td><input type="text" name="content" value="${data.content}"
+				required></td>
 		</tr>
 		<tr>
 			<td>작성자</td>
-			<td><input type="text" name="writer"
-				value="${data.writer}" required readonly></td>
+			<td><input type="text" name="writer" value="${data.writer}"
+				required readonly></td>
 		</tr>
 		<tr>
 			<td>조회수</td>
@@ -65,25 +65,18 @@ request.setCharacterEncoding("UTF-8");
 				required readonly></td>
 		</tr>
 		<tr>
-			<%
-			if (member.getMid() != null) {
-			%>
-			<td><input type="button" value="좋아요" onClick="like()"></td>
+			<c:if test="${member.mid != 'null' }">
+				<td><input type="button" value="좋아요" onClick="like()"></td>
+			</c:if>
 		</tr>
-		<%
-		}
-		%>
-		<%
-		if (member.getRole() != null && (member.getRole().equals("ADMIN") || member.getMname().equals(data.getWriter()))) {
-		%>
-		<tr>
-			<td colspan="2" align="right"><br> <input type="submit"
-				value="수정하기">&nbsp;<input type="button" value="삭제하기"
-				onClick="del()"></td>
-		</tr>
-		<%
-		}
-		%>
+		<c:if
+			test="${member.role != 'null' && member.role.equals('ADMIN') || member.mname.equals(data.writer)}">
+			<tr>
+				<td colspan="2" align="right"><br> <input type="submit"
+					value="수정하기">&nbsp;<input type="button" value="삭제하기"
+					onClick="del()"></td>
+			</tr>
+		</c:if>
 	</table>
 </form>
 <body>

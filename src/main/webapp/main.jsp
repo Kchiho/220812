@@ -3,6 +3,8 @@
 <%
 request.setCharacterEncoding("UTF-8");
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <jsp:useBean id="member" class="vo.MemberVO" scope="session" />
 <%@taglib tagdir="/WEB-INF/tags" prefix="kim"%>
 <!DOCTYPE html>
@@ -13,17 +15,12 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <body>
 	<h1>
-		<%
-		if (member.getMid() != null) { // 로그인 상태 화면
-		%>
-		<a href="javascript:check()">${member.mname}</a>님, 반갑습니다! :D
-		<%
-		} else { // 비로그인 상태 화면
-		%>
-		<a>반갑습니다</a>
-		<%
-		}
-		%>
+		<c:if test="${member.mid != 'null' }">
+			<a href="javascript:check()">${member.mname}</a>님, 반갑습니다! :D
+	</c:if>
+		<c:if test="${member.mid == 'null' }">
+			<a>반갑습니다</a>
+		</c:if>
 	</h1>
 	<table border="2">
 		<tr>
@@ -54,20 +51,15 @@ request.setCharacterEncoding("UTF-8");
 		</tr>
 	</table>
 	<br>
-	<%
-	if (member.getMid() != null) { // 로그인 상태 화면
-	%>
+	<c:if test="${member.mid != 'null' }">
 	<a href="form.jsp">새로운 글 작성하기</a>
 	<br>
 	<a href="controller.jsp?action=logout">로그아웃</a>
-	<%
-	} else { // 비로그인 상태 화면
-	%>
+	</c:if>
+	<c:if test="${member.mid == 'null' }">
 	<a href="login.jsp">로그인</a>
 	<a href="join.jsp">회원가입</a>
-	<%
-	}
-	%>
+	</c:if>
 	<script type="text/javascript">
 		function search() { // 검색시 실행
 			var target = document.getElementById("selectBox");
@@ -79,10 +71,10 @@ request.setCharacterEncoding("UTF-8");
 				location.href = "controller.jsp?action=search&title=" + word;
 			}
 		}
-		function check(){
-			ans=prompt('비밀번호를 입력하세요.');
-			if(ans=='${member.mpw}'){
-				location.href="controller.jsp?action=mypage";
+		function check() {
+			ans = prompt('비밀번호를 입력하세요.');
+			if (ans == '${member.mpw}') {
+				location.href = "controller.jsp?action=mypage";
 			}
 		}
 	</script>
