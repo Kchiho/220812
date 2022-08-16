@@ -22,7 +22,7 @@ request.setCharacterEncoding("UTF-8");
 				<th>좋아요</th>
 				<th>작성일</th>
 			</tr>
-			<kim:searchResult />
+			<kim:selectAll />
 			<tr>
 				<td colspan="2" align="right"><input type="submit"
 					value="메인으로 가기"></td>
