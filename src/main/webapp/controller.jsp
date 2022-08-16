@@ -33,10 +33,10 @@ if (action.equals("main")) { // 메인
 } else if (action.equals("search")) { // 검색
 	ArrayList<BoardVO> datas = bDAO.selectAlls(bVO);
 	if (datas.size() != 0) {
-		request.setAttribute("data", bVO);
+		request.setAttribute("datas", datas);
 		pageContext.forward("searchResult.jsp"); // forward 액션
 	} else {
-		out.println("<script>alert('검색결과가 없습니다.');location.href='controller.jsp?action=main'</script>");
+		out.println("<script>alert('탈퇴한 회원이거나 검색결과가 없습니다.');location.href='controller.jsp?action=main'</script>");
 	}
 } else if (action.equals("updateB")) { // 게시글 변경
 	if (bDAO.update(bVO)) {

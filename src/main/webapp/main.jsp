@@ -5,7 +5,6 @@ request.setCharacterEncoding("UTF-8");
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<jsp:useBean id="member" class="vo.MemberVO" scope="session" />
 <%@taglib tagdir="/WEB-INF/tags" prefix="kim"%>
 <!DOCTYPE html>
 <html>
@@ -15,10 +14,10 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <body>
 	<h1>
-		<c:if test="${member.mid != 'null' }">
+		<c:if test="${member.mid != null}">
 			<a href="javascript:check()">${member.mname}</a>님, 반갑습니다! :D
 	</c:if>
-		<c:if test="${member.mid == 'null' }">
+		<c:if test="${member.mid == null}">
 			<a>반갑습니다</a>
 		</c:if>
 	</h1>
@@ -51,12 +50,12 @@ request.setCharacterEncoding("UTF-8");
 		</tr>
 	</table>
 	<br>
-	<c:if test="${member.mid != 'null' }">
+	<c:if test="${member.mid != null}">
 	<a href="form.jsp">새로운 글 작성하기</a>
 	<br>
 	<a href="controller.jsp?action=logout">로그아웃</a>
 	</c:if>
-	<c:if test="${member.mid == 'null' }">
+	<c:if test="${member.mid == null}">
 	<a href="login.jsp">로그인</a>
 	<a href="join.jsp">회원가입</a>
 	</c:if>

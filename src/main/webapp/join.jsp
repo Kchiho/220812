@@ -28,7 +28,7 @@ request.setCharacterEncoding("UTF-8");
 				<td><input type="text" name="mname"></td>
 			</tr>
 			<tr>
-				<td>역활</td>
+				<td>역할</td>
 				<td><select name="role" id="role" onchange="roleSelect()">
 						<option value="member" selected>MEMBER</option>
 						<option value="admin">ADMIN</option>

@@ -4,9 +4,6 @@
 request.setCharacterEncoding("UTF-8");
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:useBean id="data" class="vo.BoardVO" scope="request" />
-<jsp:useBean id="member" class="vo.MemberVO" scope="session" />
-<jsp:useBean id="boardL" class="vo.BoardLVO" scope="session" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,12 +62,12 @@ request.setCharacterEncoding("UTF-8");
 				required readonly></td>
 		</tr>
 		<tr>
-			<c:if test="${member.mid != 'null' }">
+			<c:if test="${member.mid != null}">
 				<td><input type="button" value="좋아요" onClick="like()"></td>
 			</c:if>
 		</tr>
 		<c:if
-			test="${member.role != 'null' && member.role.equals('ADMIN') || member.mname.equals(data.writer)}">
+			test="${member.role != null && member.role.equals('ADMIN') || member.mname.equals(data.writer)}">
 			<tr>
 				<td colspan="2" align="right"><br> <input type="submit"
 					value="수정하기">&nbsp;<input type="button" value="삭제하기"

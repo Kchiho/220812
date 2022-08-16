@@ -1,21 +1,15 @@
 <%@tag import="vo.BoardVO"%>
 <%@ tag language="java" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<jsp:useBean id="datas" class="dao.BoardDAO" />
-<jsp:useBean id="data" class="vo.BoardVO" />
-<jsp:setProperty property="*" name="data" />
 <h1><jsp:doBody /></h1>
-<%
-for (BoardVO v : datas.selectAlls(data)) {
-%>
+<c:forEach var="datas" items="${datas}">
 <tr>
-	<th><a href="controller.jsp?action=board&bid=<%=v.getBid()%>"><%=v.getBid()%></a></th>
-	<td><%=v.getTitle()%></td>
-	<td><%=v.getWriter()%></td>
-	<td><%=v.getBread()%></td>
-	<td><%=v.getBlike()%></td>
-	<td><%=v.getBdate()%></td>
+	<th><a href="controller.jsp?action=board&bid=${datas.bid}">${datas.bid}</a></th>
+	<td>${datas.title}</td>
+	<td>${datas.writer}</td>
+	<td>${datas.bread}</td>
+	<td>${datas.blike}</td>
+	<td>${datas.bdate}</td>
 </tr>
-<%
-}
-%>
+</c:forEach>

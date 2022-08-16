@@ -29,7 +29,7 @@ request.setCharacterEncoding("UTF-8");
 					value="${member.mname}"></td>
 			</tr>
 			<tr>
-				<td>역활</td>
+				<td>역할</td>
 				<td>${member.role}</td>
 			</tr>
 			<tr>

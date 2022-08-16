@@ -15,7 +15,7 @@ public class BoardDAO {
 	PreparedStatement pstmt;
 	final String sql_selectOne="SELECT B.*, M.MNAME FROM BOARD B, MEMBER M WHERE B.WRITER = M.MID(+) AND B.BID=?";
 	final String sql_selectAll="SELECT * FROM BOARD";
-	final String sql_selectAllw="SELECT B.*, M.MNAME FROM (SELECT * FROM BOARD WHERE WRITER LIKE '%'||?||'%') B, MEMBER M WHERE B.WRITER = M.MID(+) ORDER BY B.BID DESC";
+	final String sql_selectAllw="SELECT B.*, M.MNAME FROM (SELECT * FROM MEMBER WHERE MNAME LIKE '%'||?||'%') M, BOARD B WHERE B.WRITER = M.MID ORDER BY B.BID DESC";
 	final String sql_selectAllt="SELECT B.*, M.MNAME FROM (SELECT * FROM BOARD WHERE TITLE LIKE '%'||?||'%') B, MEMBER M WHERE B.WRITER = M.MID(+) ORDER BY B.BID DESC";
 	final String sql_insert="INSERT INTO BOARD VALUES((SELECT NVL(MAX(BID),0) +1 FROM BOARD),?,?,?,0,0,(SELECT SYSDATE FROM DUAL))";
 	final String sql_update="UPDATE BOARD SET TITLE=?,CONTENT=? WHERE BID=?";
@@ -86,8 +86,8 @@ public class BoardDAO {
 			while(rs.next()) {
 				BoardVO data=new BoardVO();
 				data.setBid(rs.getInt("BID"));
-				data.setContent(rs.getString("CONTENT"));
 				data.setTitle(rs.getString("TITLE"));
+				data.setContent(rs.getString("CONTENT"));
 				if(rs.getString("MNAME") != null) {
 					data.setWriter(rs.getString("MNAME"));
 				}else {
