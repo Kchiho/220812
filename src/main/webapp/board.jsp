@@ -61,13 +61,13 @@ request.setCharacterEncoding("UTF-8");
 			<td><input type="text" name="bdate" value="${data.bdate}"
 				required readonly></td>
 		</tr>
-		<tr>
-			<c:if test="${member.mid != null}">
+		<c:if test="${member.mid != null}">
+			<tr>
 				<td><input type="button" value="좋아요" onClick="like()"></td>
-			</c:if>
-		</tr>
+			</tr>
+		</c:if>
 		<c:if
-			test="${member.role != null && member.role.equals('ADMIN') || member.mname.equals(data.writer)}">
+			test="${member.role.equals('ADMIN') || member.mname.equals(data.writer)}">
 			<tr>
 				<td colspan="2" align="right"><br> <input type="submit"
 					value="수정하기">&nbsp;<input type="button" value="삭제하기"
